@@ -61,7 +61,7 @@ public class JavaSky extends SwingWorker<Void, String> {
 			// out put text
 			if (direct) {
 				Window.textArea.setText("");
-				Window.updateConsoleText("Ported sky:\n " + exportPath, false);
+				Window.updateConsoleText("Successfuly Ported:\n " + exportPath, false);
 			}
 			// enable file actions again
 			Window.busy = false;
