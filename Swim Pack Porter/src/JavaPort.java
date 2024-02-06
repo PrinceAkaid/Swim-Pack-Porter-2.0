@@ -31,8 +31,8 @@ public class JavaPort extends SwingWorker<Void, String> {
 		System.out.println("porting mcpack");
 		String pax[] = file.getName().split(".mcpack", 2);
 		String mcpackName = pax[0];
-		// copy pack to swim services folder
-		File packTempLocation = new File(System.getenv("APPDATA") + "\\Swim Services\\" + file.getName());
+		// copy pack to Crazy Porter folder
+		File packTempLocation = new File(System.getenv("APPDATA") + "\\Crazy Porter\\" + file.getName());
 		FileUtils.copyFile(file, packTempLocation);
 		unzipMCPACK(packTempLocation); // unzip the mcpack
 		String packPath = Window.configs.get(1) + "\\";
@@ -81,7 +81,7 @@ public class JavaPort extends SwingWorker<Void, String> {
 			packMeta.write("{\n");
 			packMeta.write("  \"pack\": {\n");
 			packMeta.write("    \"pack_format\": 1,\n");
-			packMeta.write("    \"description\": \"Ported From MCPE Using Swimfan72's Pack Porter\"\n");
+			packMeta.write("    \"description\": \"Ported for Bedrock/MCPE Edition\"\n");
 			packMeta.write("  }\n");
 			packMeta.write("}");
 			packMeta.close();
@@ -94,14 +94,14 @@ public class JavaPort extends SwingWorker<Void, String> {
 	public static void packIcon(String path, String pack, String name) {
 		try {
 			Window.textArea.setText(" Current Task: Porting Pack Icon");
-			File pack_icon = new File(System.getenv("APPDATA") + "\\Swim Services\\" + name + "\\" + pack + "\\pack_icon.png");
+			File pack_icon = new File(System.getenv("APPDATA") + "\\Crazy Porter\\" + name + "\\" + pack + "\\pack_icon.png");
 			if (pack_icon.exists()) {
 				FileUtils.copyFile(pack_icon, new File(path + "\\pack_icon.png"));
 				File pax1 = new File(path + "\\pack_icon.png");
 				File pax2 = new File(path + "\\pack.png");
 				pax1.renameTo(pax2);
 			} else { // sometimes only one directory deep instead
-				pack_icon = new File(System.getenv("APPDATA") + "\\Swim Services\\" + name + "\\pack_icon.png");
+				pack_icon = new File(System.getenv("APPDATA") + "\\Crazy Porter\\" + name + "\\pack_icon.png");
 				FileUtils.copyFile(pack_icon, new File(path + "\\pack_icon.png"));
 				File pax1 = new File(path + "\\pack_icon.png");
 				File pax2 = new File(path + "\\pack.png");
@@ -116,13 +116,13 @@ public class JavaPort extends SwingWorker<Void, String> {
 	public static void textures(String path, String pack, String name) {
 		try {
 			Window.textArea.setText(" Current Task: Porting Textures..");
-			File textures = new File(System.getenv("APPDATA") + "\\Swim Services\\" + name + "\\" + pack + "\\textures");
+			File textures = new File(System.getenv("APPDATA") + "\\Crazy Porter\\" + name + "\\" + pack + "\\textures");
 			if (textures.exists()) {
 				System.out.println("textures folder found: " + textures.getAbsolutePath());
 				File dest = new File(path + "\\assets\\minecraft\\textures");
 				FileUtils.copyDirectory(textures, dest);
 			} else { // sometimes only one directory deep instead
-				textures = new File(System.getenv("APPDATA") + "\\Swim Services\\" + name + "\\textures");
+				textures = new File(System.getenv("APPDATA") + "\\Crazy Porter\\" + name + "\\textures");
 				File dest = new File(path + "\\assets\\minecraft\\textures");
 				FileUtils.copyDirectory(textures, dest);
 				System.out.println("textures folder found: " + textures.getAbsolutePath());
@@ -135,7 +135,7 @@ public class JavaPort extends SwingWorker<Void, String> {
 
 	public static void potions(String path) {
 		try {
-			Window.textArea.setText(" Current Task: Porting Potions..");
+			Window.textArea.setText(" Current Task: Porting Potions...");
 			Path potionDir = Paths.get(path + "\\assets\\minecraft\\textures\\items\\potion_bottle_heal.png");
 			BufferedImage pot = ImageIO.read(new File(potionDir.toString()));
 			int xMidPoint = (int) (pot.getWidth() * (46.88 / 100.0f));
@@ -205,7 +205,7 @@ public class JavaPort extends SwingWorker<Void, String> {
 		File done = new File(export);
 		ImageIO.write(image, "PNG", done); // drinkable export
 		pot.dispose();
-		File overlay = new File(path.getParent().toString() + "\\swim overlay.png"); // gets deleted afterwards
+		File overlay = new File(path.getParent().toString() + "\\pack overlay.png"); // gets deleted afterwards
 		ImageIO.write(canvas, "PNG", overlay);
 		g2.dispose();
 
@@ -266,12 +266,12 @@ public class JavaPort extends SwingWorker<Void, String> {
 	public static void sounds(String path, String pack, String name) {
 		try {
 			Window.textArea.setText(" Current Task: Porting Sounds");
-			File sounds = new File(System.getenv("APPDATA") + "\\Swim Services\\" + name + "\\" + pack + "\\sounds");
+			File sounds = new File(System.getenv("APPDATA") + "\\Crazy Porter\\" + name + "\\" + pack + "\\sounds");
 			File soundsDest = new File(path + "\\assets\\minecraft");
 			if (sounds.exists()) {
 				FileUtils.copyDirectoryToDirectory(sounds, soundsDest);
 			} else { // if only one directory deep
-				sounds = new File(System.getenv("APPDATA") + "\\Swim Services\\" + name + "\\sounds");
+				sounds = new File(System.getenv("APPDATA") + "\\Crazy Porter\\" + name + "\\sounds");
 				FileUtils.copyDirectoryToDirectory(sounds, soundsDest);
 			}
 		} catch (Exception e) {
@@ -363,13 +363,13 @@ public class JavaPort extends SwingWorker<Void, String> {
 		// copy over container if it exists
 		Window.textArea.setText(" Current Task: Porting GUI");
 		try {
-			File containerDir = new File(System.getenv("APPDATA") + "\\Swim Services\\" + name + "\\" + pack + "\\assets\\minecraft\\textures\\gui\\container");
+			File containerDir = new File(System.getenv("APPDATA") + "\\Crazy Porter\\" + name + "\\" + pack + "\\assets\\minecraft\\textures\\gui\\container");
 			if (containerDir.exists()) {
 				System.out.println("textures folder found: " + containerDir.getAbsolutePath());
 				File dest = new File(path + "\\assets\\minecraft\\textures\\gui\\container");
 				FileUtils.copyDirectory(containerDir, dest);
 			} else { // sometimes only one directory deep instead
-				containerDir = new File(System.getenv("APPDATA") + "\\Swim Services\\" + name + "\\assets\\minecraft\\textures\\gui\\container");
+				containerDir = new File(System.getenv("APPDATA") + "\\Crazy Porter\\" + name + "\\assets\\minecraft\\textures\\gui\\container");
 				File dest = new File(path + "\\assets\\minecraft\\textures\\gui\\container");
 				FileUtils.copyDirectory(containerDir, dest);
 				System.out.println("container folder found: " + containerDir.getAbsolutePath());
@@ -508,7 +508,7 @@ public class JavaPort extends SwingWorker<Void, String> {
 			File renamePack = new File(path + " MCBEPORT");
 			pack.renameTo(renamePack);
 			Window.textArea.setText("");
-			Window.updateConsoleText("Successfully Ported Pack:\n " + renamePack.getAbsolutePath(), false);
+			Window.updateConsoleText("Successfully Ported:\n " + renamePack.getAbsolutePath(), false);
 			Window.busy = false;
 			System.out.println("no longer busy");
 		} catch (Exception e) {
