@@ -83,8 +83,8 @@ public class Port extends SwingWorker<Void, String> {
 		}
 
 		String name = FilenameUtils.removeExtension(file.getName());
-		String packName = FilenameUtils.getName(name + " PORT");
-		String description = originalDescription + "\\nPorted with Swimfan72's Auto Port";
+		String packName = FilenameUtils.getName(name + "Ported");
+		String description = originalDescription + "\\nPorted for Bedrock/MCPE Edition By CrazyBoy95YT";
 
 		if (!failed) {
 			new File(packPath + packName).mkdirs(); // folder of pack
