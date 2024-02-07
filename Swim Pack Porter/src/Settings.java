@@ -38,7 +38,7 @@ public class Settings {
 	 */
 	public static void initialize() {
 		System.out.println("opening settings");
-		JDialog dialog = new JDialog((JFrame) null, "Swim Pack Port Settings (Loads from swim_pack.config)", true);
+		JDialog dialog = new JDialog((JFrame) null, "Crazy Porter Port Settings (Loads from crazy_porter.config)", true);
 		dialog.getContentPane().setBackground(new Color(51, 51, 51));
 
 		dialog.setBounds(400, 400, 600, 300);
@@ -53,7 +53,7 @@ public class Settings {
 		applySettings.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("saving settings");
-				File config = new File(System.getenv("APPDATA") +"\\Swim Services\\swim_pack.config");
+				File config = new File(System.getenv("APPDATA") +"\\Crazy Porter\\crazy_porter.config");
 				try {
 					FileWriter configWriter = new FileWriter(config);
 					if(chckbxNewCheckBox.isSelected()) {
@@ -187,7 +187,7 @@ public class Settings {
 		JTextPane textPane = new JTextPane();
 		textPane.setBackground(new Color(204, 204, 204));
 		textPane.setBounds(29, 11, 538, 47);
-		File config = new File(System.getenv("APPDATA") +"\\Swim Services\\swim_pack.config");
+		File config = new File(System.getenv("APPDATA") +"\\Crazy Porter\\crazy_porter.config");
 		textPane.setText("Config file location: (DOES NOT CHANGE)\n" + config.getAbsolutePath());
 		textPane.setEditable(false);
 		dialog.getContentPane().add(textPane);
