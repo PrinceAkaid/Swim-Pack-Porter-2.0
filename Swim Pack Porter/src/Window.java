@@ -25,7 +25,7 @@ import java.awt.Color;
 
 public class Window {
 
-	public static JFrame frame = new JFrame("Swim Services Pack Porter v2.0");
+	public static JFrame frame = new JFrame("Crazy Porter");
 	public static JTextArea textArea = new JTextArea();
 	public static JButton btnPortSky;
 	public static String packSavePath;
@@ -42,7 +42,7 @@ public class Window {
 		try {
 			if (assets.exists()) {
 				System.out.println("assets folder found");
-				File assetsDest = new File(System.getenv("APPDATA") + "\\Swim Services");
+				File assetsDest = new File(System.getenv("APPDATA") + "\\Crazy Porter");
 				FileUtils.copyDirectoryToDirectory(assets, assetsDest);
 			} else {
 				System.out.println("assets folder not found");
@@ -51,19 +51,19 @@ public class Window {
 			System.out.println("Error moving assets folder");
 		}
 		System.out.println(path);
-		File swimFolder = new File(System.getenv("APPDATA") + "\\Swim Services");
+		File crazyFolder = new File(System.getenv("APPDATA") + "\\Crazy Porter");
 		try {
-			if (swimFolder.exists()) {
+			if (crazyFolder.exists()) {
 				cleanAppData();
 			}
 		} catch (Exception e) {
-			System.out.println("Swim folder not found");
+			System.out.println("Crazy folder not found");
 		}
 		File home = FileSystemView.getFileSystemView().getHomeDirectory();
 		String desktop = home.getAbsolutePath();
-		String defaultCube = desktop + "\\overworld_cubemap";
+		String defaultCube = desktop + "\\Sky Ported";
 		// first thing to do is load config file
-		File config = new File(System.getenv("APPDATA") + "\\Swim Services\\swim_pack.config");
+		File config = new File(System.getenv("APPDATA") + "\\Crazy Porter\\crazy_porter.config");
 		if (config.exists()) {
 			System.out.println("config file found");
 			// read the configs
@@ -81,7 +81,7 @@ public class Window {
 			configReader.close();
 		} else {
 			System.out.println("config not found or failed to load, generating new config file");
-			new File(System.getenv("APPDATA") + "\\Swim Services").mkdirs();
+			new File(System.getenv("APPDATA") + "\\Crazy Porter").mkdirs();
 			config.createNewFile();
 			configs.clear();
 			FileWriter configWriter = new FileWriter(config);
@@ -119,7 +119,7 @@ public class Window {
 		portButton.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		portButton.setBounds(225, 335, 450, 110);
 		frame.getContentPane().add(portButton);
-		updateConsoleText("Swim Services Minecraft Texture Pack Porter v2.0\n Now Supports MCPACK to Java Conversion and File Upload Drag and Drop", true);
+		updateConsoleText("Crazy Porter Minecraft Texture Pack Porter \n MCPACK to Java Conversion and File Upload Drag and Drop", true);
 
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(48, 23, 800, 295);
@@ -234,7 +234,7 @@ public class Window {
 		portButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (!busy) {
-					portButton.setText("Currently Porting Pack..");
+					portButton.setText("Currently Porting Pack...");
 					JFileChooser fileChooser = new JFileChooser();
 					fileChooser.setCurrentDirectory(new File("C:\\Users\\" + System.getProperty("user.name") + "\\Desktop")); // sets current directory
 					fileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
@@ -277,7 +277,7 @@ public class Window {
 			System.out.println("extension is: " + extension);
 			if (extension.equals("zip")) {
 				String name = FilenameUtils.removeExtension(file.getName());
-				File zipPack = new File(System.getenv("APPDATA") + "\\Swim Services\\" + name);
+				File zipPack = new File(System.getenv("APPDATA") + "\\Crazy Porter\\" + name);
 				FileUtils.copyFileToDirectory(file, zipPack.getParentFile());
 				try {
 					busy = true;
@@ -353,13 +353,13 @@ public class Window {
 		try {
 			String extension = FilenameUtils.getExtension(file.toString()).toLowerCase();
 			if (extension.equals("png")) { // java sky to cubemap
-				System.out.println("java sky porting to mcpe cubemap");
+				System.out.println("java sky porting to bedrock/mcpe cubemap");
 				workerSkyPath = uploadedFile;
 				SkyPort task = new SkyPort();
 				task.execute();
 			} else {
 				if (file.isDirectory()) { // cubemap to java sky
-					System.out.println("mcpe cubemap porting to java sky");
+					System.out.println("bedrock/mcpe cubemap porting to java sky");
 					DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy_MM_dd HH_mm_ss");
 					LocalDateTime now = LocalDateTime.now();
 					String skyLocation = Window.configs.get(2) + "\\java sky " + dtf.format(now) + "\\";
@@ -413,10 +413,10 @@ public class Window {
 	}
 
 	public static void cleanAppData() throws IOException {
-		File swimServicesDir = new File(System.getenv("APPDATA") + "\\Swim Services");
-		File[] swimFiles = swimServicesDir.listFiles();
-		for (File file : swimFiles) {
-			if (!(file.getName().equals("swim_pack.config")) && !(file.getName().equals("assets"))) {
+		File crazyPorterDir = new File(System.getenv("APPDATA") + "\\Crazy Porter");
+		File[] crazyFiles = crazyPorterDir.listFiles();
+		for (File file : crazyFiles) {
+			if (!(file.getName().equals("crazy_porter.config")) && !(file.getName().equals("assets"))) {
 				FileUtils.forceDelete(file);
 				System.out.println("cleaning out file: " + file.getAbsolutePath());
 			}
